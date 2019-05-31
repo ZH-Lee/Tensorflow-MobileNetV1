@@ -74,8 +74,8 @@ step per epochs   = 10k
 ```
 Finally, i got 
 ```
-train acc 0.80+ 
-train loss 0.6~
+train acc 0.94+ 
+train loss 0.0~
 test  acc 0.76+
 ```
 Because of the number of every class in cifar are retively balanced, so i just use top-1 acc to measure my model,but if your own dataset are imbalanced, you will need some other score (e.g. Recall, mAP, F1 Score, etc.) to measure your result. Besides, i got stuck in lower train acc 0.8+, the one reson flash in my mind is that the resolution of cifar image is too small, only 32*32, after some downsample, it becomes one pixel, it is diffcult to use this information. I can't use higher resolution image because of no gpus. So, you can try train a more accuracy model by following methods:
