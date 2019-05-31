@@ -11,6 +11,7 @@ My Environment:
 Mac 10.14 (no GPU)
 Python3.6
 Tensorflow 1.12
+Train: Tesla T4 (Google Colab)
 ```
 
 1. Clone this repo  
@@ -65,19 +66,26 @@ $ python3 train.py --lr 1e-3 --batch_size 16 --epochs 20 --load_pretrain 0
 ```
 ## Experiment
 Some hyperparameters i used to train my pre_train weights are as below:
+First train:
 ```
 lr                = 0.001
 batch_size        = 16
 data_aug          = False
-epochs            = 5
+epochs            = 10
 step per epochs   = 10k
+load_pretrain     = False
 ```
-Finally, i got 
+it will got test acc 0.7+
+then 
 ```
-train acc 0.94+ 
-train loss 0.0~
-test  acc 0.76+
+lr                = 1e-6
+batch_size        = 16
+data_aug          = False
+epochs            = 10
+step per epochs   = 10k
+load_pretrain     = True
 ```
+
 Because of the number of every class in cifar are retively balanced, so i just use top-1 acc to measure my model,but if your own dataset are imbalanced, you will need some other score (e.g. Recall, mAP, F1 Score, etc.) to measure your result. Besides, i got stuck in lower train acc 0.8+, the one reson flash in my mind is that the resolution of cifar image is too small, only 32*32, after some downsample, it becomes one pixel, it is diffcult to use this information. I can't use higher resolution image because of no gpus. So, you can try train a more accuracy model by following methods:
 ```
 1. Use higher resoltion image, 224*224 or 416*416
