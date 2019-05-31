@@ -92,13 +92,14 @@ train loss        = 0.0+
 test acc          = 0.76+
 ```
 ## Explain
-Because of the number of every class in cifar are retively balanced, so i just use top-1 acc to measure my model,but if your own dataset are imbalanced, you will need some other score (e.g. Recall, mAP, F1 Score, etc.) to measure your result. Besides, i got stuck in lower train acc 0.8+, the one reson flash in my mind is that the resolution of cifar image is too small, only 32*32, after some downsample, it becomes one pixel, it is diffcult to use this information. I can't use higher resolution image because of no gpus. So, you can try train a more accuracy model by following methods:
+Because of the number of every class in cifar are retively balanced, so i just use top-1 acc to measure my model,but if your own dataset are imbalanced, you will need some other score (e.g. Recall, mAP, F1 Score, etc.) to measure your result. Besides, i got stuck in lower train acc 0.9+, the one reson flash in my mind is that the resolution of cifar image is too small, only 32*32, after some downsample, it becomes one pixel, it is diffcult to use this information. I can't use higher resolution image because of no gpus. So, you can try train a more accuracy model by following methods:
 ```
 1. Use higher resoltion image, 224*224 or 416*416
 2. Use staircase learning rate decay method
 3. Train more epochs
 4. Change batch size
 ```
+I've tried using data_aug, that makes the result even worse.
 What paper explanied is use less regularization and less augmentation because small model have less trouble with overfitting. Maybe the small model have samll capacity to representation??? I don't know so far.
 
 ## Some others...
