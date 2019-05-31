@@ -1,11 +1,11 @@
 # Tensorflow-Mobilenet
 Mobilenetv1 implemented by Tensorflow
 
-## 1. BG  
+## BG  
 As we all know, MobileNetv1 is a light framework neural network, it can be deployed in any mobile device. The full details in paper(https://arxiv.org/abs/1704.04861)  
 The final goal is to take MobileNet as backbone in YOLOv3. But it is diffucult to train from scratch, so a mobilenet pre_train weight is needed.  
 
-## 2. Quick Start  
+## Quick Start  
 My Environment:
 ```
 Mac 10.14 (no GPU)
@@ -15,7 +15,7 @@ Tensorflow 1.12
 
 1. Clone this repo  
 ```
-$ git clone 
+$ git clone https://github.com/ZH-Lee/Tensorflow-Mobilenet.git
 ```
 2. You will need a cifar10 dataset before train your model
 ```
@@ -39,7 +39,7 @@ After step mentioned above, your repo will looks like this:
           mobilenet.py
           train.py
 ```
-## 3. train your model  
+## Train your model  
 You are allowed to use command line to start training:
 ```
       The agrs are description below:
@@ -78,4 +78,7 @@ train acc 0.80+
 train loss 0.6~
 test  acc 0.76+
 ```
-Because of the number of every class in cifar are retively balanced, so i just use top-1 acc to measure my model,but if your own dataset are imbalanced, you will need some other score (e.g. Recall, mAP, F1 Score, etc.) to measure your result.
+Because of the number of every class in cifar are retively balanced, so i just use top-1 acc to measure my model,but if your own dataset are imbalanced, you will need some other score (e.g. Recall, mAP, F1 Score, etc.) to measure your result. Besides, i got stuck in lower train acc 0.8+, the one reson flash in my mind is that the resolution of cifar image is too small, only 32*32, after some downsample, it becomes one pixel, it is diffcult to use this information.   
+
+## Some others...
+If you have any problem or if you train a higher acc model, pleases let me know and send E-mail : lizh_1994@163.com 
