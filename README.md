@@ -6,7 +6,13 @@ As we all know, MobileNetv1 is a light framework neural network, it can be deplo
 The final goal is to take MobileNet as backbone in YOLOv3. But it is diffucult to train from scratch, so a mobilenet pre_train weight is needed.  
 
 ## 2. Quick Start  
-First, you will need a CiFar10 dataset:  
+My Environment:
+```
+Mac 10.14 (no GPU)
+Python3.6
+Tensorflow 1.12
+```
+
 1. Clone this repo  
 ```
 $ git clone 
@@ -38,13 +44,38 @@ You are allowed to use command line to start training:
 ```
       The agrs are description below:
         --lr            learing_rate from begin, and it will decay by 0.99
-        --batch_size    a mini_batch size depend on your GPU memory, a appropriate 
+        --batch_size    a mini_batch size depend on your GPU memory, a appropriate batch size is needed, not too larget or too small
+        --epochs        the total epoch your model trained
+        --load_pretrain whether load a pretrain weights for your model or not
+        --pretrain_path the path of your pretrain_path, only by setting 'load_pretrain' be true, you can use this pretrain weight
 ```
-Here are two ways to train model, the first is to load pre_train model that i train on my Mac.
+Here are two ways to train model, the first is to load pre_train model that i train on my Mac.In this way, you are expected to download pre_train model
+```
+$ wget https://github.com/ZH-Lee/Tensorflow-Mobilenet/releases/download/Mobilenetv1-0.7688/Mobilenet-0.768.zip
+```
+and then put this ckpt.zip into your ckpt dir in your repo.
+next...
 ```
 $ python3 train.py --lr 1e-3 --batch_size 16 --epochs 20 --load_pretrain 1
 ```
+
 The second ways is to train your model from scratch
 ```
 $ python3 train.py --lr 1e-3 --batch_size 16 --epochs 20 --load_pretrain 0
 ```
+## Experiment
+Some hyperparameters i used to train my pre_train weights are as below:
+```
+lr                = 0.001
+batch_size        = 16
+data_aug          = False
+epochs            = 5
+step per epochs   = 10k
+```
+Finally, i got 
+```
+train acc 0.80+ 
+train loss 0.6~
+test  acc 0.76+
+```
+Because of the number of every class in cifar are retively balanced, so i just use top-1 acc to measure my model,but if your own dataset are imbalanced, you will need some other score (e.g. Recall, mAP, F1 Score, etc.) to measure your result.
